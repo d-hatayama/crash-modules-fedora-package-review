@@ -3,13 +3,14 @@
 Summary: Gcore extension module for the crash utility
 Name: crash-gcore-command
 Version: 1.6.2
-Release: 0%{?dist}
+Release: 1%{?dist}
 License: GPLv2
 Source0: https://github.com/fujitsu/crash-gcore/archive/v%{version}/%{name}-%{version}.tar.gz
 URL: https://github.com/fujitsu/crash-gcore
 ExclusiveOS: Linux
-ExclusiveArch: x86_64 aarch64
+ExclusiveArch: aarch64 ppc64le x86_64
 BuildRequires: crash-devel >= 5.1.5
+BuildRequires: gcc
 Requires: crash >= 5.1.5
 
 %description
@@ -20,17 +21,16 @@ running in a kernel dump file.
 %autosetup -n %{reponame}-%{version}
 
 %build
-make -C src -f gcore.mk
+%make_build -C src -f gcore.mk
 
 %install
-mkdir -p %{buildroot}%{_libdir}/crash/extensions/
+install -m 0755 -d %{buildroot}%{_libdir}/crash/extensions/
 install -m 0755 -t %{buildroot}%{_libdir}/crash/extensions/ %{_builddir}/%{reponame}-%{version}/src/gcore.so
 
 %files
-%defattr(-,root,root)
 %{_libdir}/crash/extensions/gcore.so
-%doc COPYING
+%license COPYING
 
 %changelog
-* Fri Jan 22 2021 HATAYAMA Daisuke <d.hatayama@fujitsu.com> - 1.6.2-0
+* Fri Jan 22 2021 HATAYAMA Daisuke <d.hatayama@fujitsu.com> - 1.6.2-1
 - Initial crash-gcore-command package
