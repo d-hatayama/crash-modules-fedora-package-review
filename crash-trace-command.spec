@@ -27,9 +27,6 @@ Command for reading ftrace data from a dump file.
 install -m 0755 -d %{buildroot}%{_libdir}/crash/extensions
 install -m 0755 -t %{buildroot}%{_libdir}/crash/extensions %{_builddir}/%{reponame}-%{version}/trace.so
 
-%clean
-rm -rf %{buildroot}
-
 %files
 %dir %{_libdir}/crash
 %dir %{_libdir}/crash/extensions
