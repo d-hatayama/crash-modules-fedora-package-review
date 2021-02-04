@@ -24,10 +24,12 @@ running in a kernel dump file.
 %make_build -C src -f gcore.mk
 
 %install
-install -m 0755 -d %{buildroot}%{_libdir}/crash/extensions/
-install -m 0755 -t %{buildroot}%{_libdir}/crash/extensions/ %{_builddir}/%{reponame}-%{version}/src/gcore.so
+install -m 0755 -d %{buildroot}%{_libdir}/crash/extensions
+install -m 0755 -t %{buildroot}%{_libdir}/crash/extensions %{_builddir}/%{reponame}-%{version}/src/gcore.so
 
 %files
+%dir %{_libdir}/crash
+%dir %{_libdir}/crash/extensions
 %{_libdir}/crash/extensions/gcore.so
 %license COPYING
 
